@@ -1,9 +1,11 @@
 
 class Event():
 
-    def __init__ (self,name,date):
+    def __init__ (self,name,date,startTime,endTime):
         self.name = name
         self.date= date
+        self.startTime=startTime
+        self.endTime=endTime
 
     def getName(self):
         return self.name
