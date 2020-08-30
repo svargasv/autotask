@@ -3,6 +3,8 @@ import calendar
 from event import Event
 from datetime import date,datetime,time
 from operator import attrgetter
+import html
+
 
 events = list()
 
@@ -10,16 +12,15 @@ year = date.today().year
 
 days_abrr=['MO','TH','WE','TU','FR','SA','SU']
 def createCalendar():
-    contador = 0
     almanac = Calendar()
-    with open('calendar.ics','r') as f:
+    with open('calendar.ics','rb') as f:
         almanac= Calendar.from_ical(f.read())
 
 
     for component in almanac.walk():
         #getting the info of each class
         if component.name == 'VEVENT':
-            name=component.get('summary')
+            name=html.unescape(component.get('summary'))
             startDate=component.get('dtstart').dt
             endDate=component.get('dtend').dt
             daysWeek=component.get('rrule').get('byday')
